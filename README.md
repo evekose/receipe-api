@@ -1,1 +1,3 @@
-# receipe-api
+# recipe-api
+
+## Developers: Eve Köse 
