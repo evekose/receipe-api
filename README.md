@@ -1,3 +1,4 @@
 # recipe-api
 
-## Developers: Anni Maasik
+## Developers: Eve Köse, Anni Maasik 
+
