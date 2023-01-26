@@ -1,16 +1,7 @@
-exports.getAll=async (req, res)=>{
-    let connection
-    try{
-        connection = await pool.getConnection()
-        const rows=await connection.query("SELECT id, name FROM customers")
-        console.log(rows)
-        res.send(rows)
+const db = require("../db")
+const Recipe = db.recipes
 
-        
-    }catch(error){
-        throw error
-
-    }finally{
-        if(connection)return connection.end()
-    }
+exports.getAll = async (req, res) => {
+ const recipes = await Recipe.findAll({attributes:["name"]})
+ res.send(recipes)
 }
