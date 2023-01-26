@@ -20,6 +20,21 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 });
 
+app.get("/recipes", async (req, res,)=>{
+    let connection 
+    try{
+        connection = await pool.getConnection()
+        const rows=await connection.query("SELECT * FROM recipes")
+        res.send(rows)
+
+    }catch(error){
+        throw error
+
+    }finally{
+        if(connection)return connection.end()
+    }
+})
+
 app.get("/customers", async (req, res,)=>{
     let connection 
     try{
