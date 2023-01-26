@@ -37,6 +37,22 @@ app.get("/customers", async (req, res,)=>{
     }
 })
 
+app.get("/ingredients", async (req, res,)=>{
+    let connection 
+    try{
+        connection = await pool.getConnection()
+        const rows=await connection.query("SELECT id* name FROM ingredients")
+        console.log(rows)
+        res.send(rows)
+
+        
+    }catch(error){
+        throw error
+
+    }finally{
+        if(connection)return connection.end()
+    }
+})
 app.listen(port,()=>{
     console.log(`API up at: http://localhost:${port}`)
 })
