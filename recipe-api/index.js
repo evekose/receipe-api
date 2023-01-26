@@ -10,6 +10,8 @@ app.get('/recipe',(req, res) => {
 })
 app.use('/docs',swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
+
+
 app.listen(port,()=>{
     console.log(`API up at: http://localhost:${port}`)
 })

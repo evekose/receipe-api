@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/evekose/receipe-api/issues"
   },
-  "homepage": "https://github.com/evekose/receipe-api#readme"
+  "homepage": "https://github.com/evekose/receipe-api#readme",
+  "dependencies": {
+    "mariadb": "^3.0.2"
+  }
 }
