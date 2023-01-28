@@ -57,13 +57,9 @@ app.get("/ingredients", async (req, res,)=>{
     try{
         connection = await pool.getConnection()
         const rows=await connection.query("SELECT * FROM ingredients")
-        console.log(rows)
         res.send(rows)
-
-        
     }catch(error){
         throw error
-
     }finally{
         if(connection)return connection.end()
     }
