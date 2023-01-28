@@ -64,8 +64,38 @@
             "summary": "Get a list of all recipes",
             "description": "Returns a list of all recipes in API"
         }
+    },
+    "/customers": {
+        "get": {
+            "responses": {
+                "200": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "List of customers": {
+                                    "value": [
+                                        "customer1",
+                                        "customer2"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "description": "Returns a list of customers"
+                }
+            },
+            "summary": "Get a list of all customers",
+            "description": "Returns a list of all customers in API"
+        }
     }
 }
 }
+
   
 
