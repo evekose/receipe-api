@@ -32,6 +32,40 @@
         "summary": "Get a list of all ingredients",
         "description": "Returns a list of all ingredients in API"
       }
+    },
+    "/recipe": {
+        "get": {
+            "tags": [
+                "recipes"
+            ],
+            "responses": {
+                "200": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "List of recipes": {
+                                    "value": [
+                                        "recipe1",
+                                        "recipe2"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "description": "Returns a list of recipes"
+                }
+            },
+            "summary": "Get a list of all recipes",
+            "description": "Returns a list of all recipes in API"
+        }
     }
-  }
 }
+}
+  
+
