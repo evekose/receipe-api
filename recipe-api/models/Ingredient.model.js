@@ -1,5 +1,5 @@
 module.exports=(sequelize, Sequelize) =>{
-    const Recipe=sequelize.define("recipe", {
+    const Ingredient=sequelize.define("ingredient", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -9,20 +9,16 @@ module.exports=(sequelize, Sequelize) =>{
             type: Sequelize.STRING,
             allowNull: false,
         },
-        ingredientsAmount: {
+        category: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        amount: {
             type: Sequelize.DOUBLE,
             allowNull: false,
         },
-        howToMake: {
-            type: Sequelize.STRING(4096),
-            allowNull: false,
-        },
-        pictureURL: {
-            type: Sequelize.STRING,
-            allowNull: true
-        }
         
     })
 
-    return Recipe
+    return Ingredient
 }
