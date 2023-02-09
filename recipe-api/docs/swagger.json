@@ -1,127 +1,199 @@
 {
-  "openapi": "3.0.2",
-  "info": {
-      "title": "Recipe-API",
-      "version": "1.0.0",
-      "description": "### This is a Swagger UI for our Recipe API  \\n\\n### Error handling\\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\\n\\n```\\n{\\n  \\\"error\\\": \\\"Cleartext explanation of the error that occurred\\\"\\n}\\n```\\n\\n### Generic API errors\\nThese error responses can be returned by any of the described endpoints.\\n\\n| HTTP status  |  Description |\\n|---|---|\\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\\n| 404| The requested resource can not be found or the user does not have access to the resource.\\n| 5XX| A server error has occurred while processing the request."
-  },
-  "paths": {
-      "/ingredients": {
-          "get": {
-              "tags": [
-                  "ingredients"
-              ],
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of ingredients": {
-                                      "value": [
-                                          "tomato",
-                                          "cucumber"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of ingredients"
-                  }
-              },
-              "summary": "Get a list of all ingredients",
-              "description": "Returns a list of all ingredients in API"
-          },
-          "post": {
-              "requestBody": {
-                  "content": {
-                      "application/json": {
-                          "schema": {
-                              "type": "string"
-                          },
-                          "examples": {
-                              "Add Ingredient": {
-                                  "value": "\"some text\""
-                              }
-                          }
-                      }
-                  }
-              },
-              "tags": [
-                  "ingredients"
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Ok"
-                  }
-              }
-          }
-      },
-      "/recipe": {
-          "get": {
-              "tags": [
-                  "recipes"
-              ],
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of recipes": {
-                                      "value": [
-                                          "recipe1",
-                                          "recipe2"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of recipes"
-                  }
-              },
-              "summary": "Get a list of all recipes",
-              "description": "Returns a list of all recipes in API"
-          }
-      },
-      "/customers": {
-          "get": {
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of customers": {
-                                      "value": [
-                                          "customer1",
-                                          "customer2"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of customers"
-                  }
-              },
-              "summary": "Get a list of all customers",
-              "description": "Returns a list of all customers in API"
-          }
-      }
-  }
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Recipe-API",
+        "version": "1.0.0",
+        "description": "### This is a Swagger UI for our Recipe API  \\n\\n### Error handling\\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\\n\\n```\\n{\\n  \\\"error\\\": \\\"Cleartext explanation of the error that occurred\\\"\\n}\\n```\\n\\n### Generic API errors\\nThese error responses can be returned by any of the described endpoints.\\n\\n| HTTP status  |  Description |\\n|---|---|\\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\\n| 404| The requested resource can not be found or the user does not have access to the resource.\\n| 5XX| A server error has occurred while processing the request."
+    },
+    "paths": {
+        "/ingredients": {
+            "get": {
+                "tags": [
+                    "ingredients"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of ingredients": {
+                                        "value": [
+                                            "tomato",
+                                            "cucumber"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of ingredients"
+                    }
+                },
+                "summary": "Get a list of all ingredients",
+                "description": "Returns a list of all ingredients in API"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "examples": {
+                                "Add Ingredient": {
+                                    "value": "\"some text\""
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "ingredients"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/recipe": {
+            "get": {
+                "tags": [
+                    "recipes"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of recipes": {
+                                        "value": [
+                                            "recipe1",
+                                            "recipe2"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of recipes"
+                    }
+                },
+                "summary": "Get a list of all recipes",
+                "description": "Returns a list of all recipes in API"
+            }
+        },
+        "/customers": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of customers": {
+                                        "value": [
+                                            "customer1",
+                                            "customer2"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of customers"
+                    }
+                },
+                "summary": "Get a list of all customers",
+                "description": "Returns a list of all customers in API"
+            }
+        },
+        "/ingredients/{id}": {
+            "get": {
+                "tags": [
+                    "ingredient"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given ingredient": {
+                                        "value": [
+                                            "some text",
+                                            "some text"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of given ingredient"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Ingredient was not found in ingredient array"
+                    }
+                },
+                "operationId": "id",
+                "summary": "Get full details of a ingredient",
+                "description": "Returns full detail of given id ingredient"
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "404": {},
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Server messed up"
+                    }
+                }
+            }
+        }
+    }
 }
