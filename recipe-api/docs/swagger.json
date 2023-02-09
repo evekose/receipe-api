@@ -159,7 +159,16 @@
                     },
                     "404": {
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Ingreideińt /w+ was not found ": {
+                                        "value": "Ingredient\\\\w+ was not found in ingredient array"
+                                    }
+                                }
+                            }
                         },
                         "description": "Ingredient was not found in ingredient array"
                     }
@@ -167,6 +176,17 @@
                 "operationId": "id",
                 "summary": "Get full details of a ingredient",
                 "description": "Returns full detail of given id ingredient"
+            },
+            "put": {
+                "requestBody": {
+                    "required": true
+                },
+                "tags": [
+                    "Ingredients"
+                ],
+                "responses": {
+                    "200": {}
+                }
             },
             "delete": {
                 "parameters": [
@@ -191,6 +211,36 @@
                             }
                         },
                         "description": "Server messed up"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error message."
+                }
+            },
+            "Ingredient": {
+                "description": "id: {\r\n            type: Sequelize.INTEGER,\r\n            primaryKey: true,\r\n            autoIncrement: true\r\n        },\r\n        name: {\r\n            type: Sequelize.STRING,\r\n            allowNull: false,\r\n        },\r\n        category: {\r\n            type: Sequelize.STRING,\r\n            allowNull: false,\r\n        },\r\n        amount: {\r\n            type: Sequelize.DOUBLE,\r\n            allowNull: false,\r\n        }",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": ""
                     }
                 }
             }

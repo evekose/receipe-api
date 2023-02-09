@@ -51,6 +51,29 @@ exports.createNew = async (req, res) => {
     res.status(204).send()
   }
   
+  exports.updateById = async (req, res) => {
+    let result
+    delete req.body.id
+
+    try {
+      result = await Ingredient.update(req.body, {where: {id: req.params.id}})
+    } catch (error) {
+      if (error instanceof db.Sequelize.ValidationError) {
+        res.status(400).send({"error":error.errors.map((item)=> item.message)})
+      } else {
+        console.log("IngredientsUpdate: ",error)
+        res.status(500).send({"error":"Something went wrong on our side. Sorry :("})
+      }
+      return
+    }
+    if (ingredient[0]===0) {
+      res.status(404).send({"error": "Ingredient not found"})
+      return
+    }
+    const ingredient = await Ingredient.findByPk(req.params.id)
+    res.status(200).location(`${getBaseUrl(req)}/ingredients/${ingredient.id}`).json(ingredient)
+  }
+
   getBaseUrl = (request) => {
     return (
       (request.connection && request.connection.encrypted ? "https" : "http") +
