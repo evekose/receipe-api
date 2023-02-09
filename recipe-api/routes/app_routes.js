@@ -16,6 +16,6 @@ app.route("/ingredients")
 .post(ingredientsController.createNew)    // Create
 app.route("/ingredients/:id")
 .get(ingredientsController.getById)       // Read
-//     .put(ingredientsController.updateById)    // Update
+.put(ingredientsController.updateById)    // Update
 .delete(ingredientsController.deleteById) // Delete
 }
