@@ -15,3 +15,7 @@ exports.getById = async (req, res) => {
     }
     res.send(ingredients)
 }
+exports.createNew = async (req,res) => {
+    console.log(req.body)
+    res.send(req.body)
+}
