@@ -33,6 +33,23 @@ exports.createNew = async (req, res) => {
       .location(`${getBaseUrl(req)}/ingredients/${ingredient.id}`)
       .json(ingredient)
   }
+
+  exports.deleteById = async (req, res) => {
+    let result
+    try{
+      result = await Ingredient.destroy({where: {id: req.params.id}})
+  } catch (error) {
+    console.log("IngredientsDelete: ", error)
+    res.status(500).send({error:"Something went wrong on our side. Sorry :("})
+    return
+  }
+    if (result===0) {
+        res.status(404).send({"error": "Ingredient not found"})
+        return
+    }
+    
+    res.status(204).send()
+  }
   
   getBaseUrl = (request) => {
     return (
