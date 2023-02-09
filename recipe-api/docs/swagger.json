@@ -1,37 +1,127 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Recipe-API",
-    "version": "1.0.0",
-    "description": "### This is a Swagger UI for our Recipe API  \\n\\n### Error handling\\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\\n\\n```\\n{\\n  \\\"error\\\": \\\"Cleartext explanation of the error that occurred\\\"\\n}\\n```\\n\\n### Generic API errors\\nThese error responses can be returned by any of the described endpoints.\\n\\n| HTTP status  |  Description |\\n|---|---|\\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\\n| 404| The requested resource can not be found or the user does not have access to the resource.\\n| 5XX| A server error has occurred while processing the request."
+      "title": "Recipe-API",
+      "version": "1.0.0",
+      "description": "### This is a Swagger UI for our Recipe API  \\n\\n### Error handling\\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\\n\\n```\\n{\\n  \\\"error\\\": \\\"Cleartext explanation of the error that occurred\\\"\\n}\\n```\\n\\n### Generic API errors\\nThese error responses can be returned by any of the described endpoints.\\n\\n| HTTP status  |  Description |\\n|---|---|\\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\\n| 404| The requested resource can not be found or the user does not have access to the resource.\\n| 5XX| A server error has occurred while processing the request."
   },
   "paths": {
-    "/ingredients": {
-      "get": {
-        "tags": ["ingredients"],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
+      "/ingredients": {
+          "get": {
+              "tags": [
+                  "ingredients"
+              ],
+              "responses": {
+                  "200": {
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "type": "string"
+                                  }
+                              },
+                              "examples": {
+                                  "List of ingredients": {
+                                      "value": [
+                                          "tomato",
+                                          "cucumber"
+                                      ]
+                                  }
+                              }
+                          }
+                      },
+                      "description": "Returns a list of ingredients"
                   }
-                },
-                "examples": {
-                  "List of ingredients": {
-                    "value": ["tomato", "cucumber"]
+              },
+              "summary": "Get a list of all ingredients",
+              "description": "Returns a list of all ingredients in API"
+          },
+          "post": {
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "string"
+                          },
+                          "examples": {
+                              "Add Ingredient": {
+                                  "value": "\"some text\""
+                              }
+                          }
+                      }
                   }
-                }
+              },
+              "tags": [
+                  "ingredients"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Ok"
+                  }
               }
-            },
-            "description": "Returns a list of ingredients"
           }
-        },
-        "summary": "Get a list of all ingredients",
-        "description": "Returns a list of all ingredients in API"
+      },
+      "/recipe": {
+          "get": {
+              "tags": [
+                  "recipes"
+              ],
+              "responses": {
+                  "200": {
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "type": "string"
+                                  }
+                              },
+                              "examples": {
+                                  "List of recipes": {
+                                      "value": [
+                                          "recipe1",
+                                          "recipe2"
+                                      ]
+                                  }
+                              }
+                          }
+                      },
+                      "description": "Returns a list of recipes"
+                  }
+              },
+              "summary": "Get a list of all recipes",
+              "description": "Returns a list of all recipes in API"
+          }
+      },
+      "/customers": {
+          "get": {
+              "responses": {
+                  "200": {
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "type": "string"
+                                  }
+                              },
+                              "examples": {
+                                  "List of customers": {
+                                      "value": [
+                                          "customer1",
+                                          "customer2"
+                                      ]
+                                  }
+                              }
+                          }
+                      },
+                      "description": "Returns a list of customers"
+                  }
+              },
+              "summary": "Get a list of all customers",
+              "description": "Returns a list of all customers in API"
+          }
       }
-    }
   }
 }
