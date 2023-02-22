@@ -2,7 +2,7 @@ const { db } = require("../db")
 const Recipe = db.recipes
 
 exports.getAll = async (req, res) => {
- const recipes = await Recipe.findAll({attributes:["name"]})
+ const recipes = await Recipe.findAll({attributes:["id","name"]})
  res.send(recipes)
 }
 
@@ -16,23 +16,41 @@ exports.getById = async (req, res) => {
 }
 
 exports.createNew = async (req,res) => {
-    let game
+    let recipe
     try {
-        game = await Recipe.create(req.body)
+        recipe = await Recipe.create(req.body)
     } catch (error) {
         if (error instanceof db.Sequelize.ValidationError) {
-            res.status(400).send({"error":error.errors.map((item)=> item.message)})
+            res.status(400).send({error: error.errors.map((item)=> item.message)})
         } else {
             console.log("RecipesCreate: ",error)
-            res.status(500).send({"error":"Something went wrong on our side. Sorry :("})
+            res
+                .status(500)
+                .send({"error":"Something went wrong on our side. Sorry :("})
         }
         return
     }
     res
         .status(201)
-        .location(`${getBaseUrl(req)}/games/${recipe.id}`)
+        .location(`${getBaseUrl(req)}/recipes/${recipe.id}`)
         .json(recipe)
 }
+exports.deleteById = async (req, res) => {
+    let result
+    try {
+      result = await Recipe.destroy({ where: { id: req.params.id } })
+    } catch (error) {
+      console.log("RecipesDelete: ",error)
+      res.status(500).send({ error: "Something went wrong on our side. Sorry :(" })
+      return
+    }
+    if (result === 0) {
+      res.status(404).send({ error: "Recipe not found" })
+      return
+    }
+    res.status(204).send()
+  }
+  
 
 getBaseUrl = (request) => {
     return (

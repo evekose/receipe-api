@@ -7,5 +7,5 @@ module.exports = (app) => {
     app.route("/recipes/:id")
         .get(recipesController.getById)       // Read
     //     .put(recipesController.updateById)    // Update
-    //     .delete(recipesController.deleteById) // Delete
+        .delete(recipesController.deleteById) // Delete
 }

@@ -102,7 +102,7 @@
                 "description": "Creates a new recipe"
             }
         },
-        "/recipes/:id": {
+        "/recipes/{id}": {
             "get": {
                 "tags": [
                     "details"
@@ -151,7 +151,42 @@
                 "operationId": "id",
                 "summary": "Get full details of a recipe",
                 "description": "Return full details of a given id recipe"
-            }
+            },
+            "delete": {
+                "tags": [
+                    "delete-recipe"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content was found. "
+                    },
+                    "404": {
+                        "description": "Recipe was not found. "
+                    }
+                },
+                "summary": "Deletes a recipe",
+                "description": "Deletes a recipe by id"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
@@ -197,6 +232,22 @@
                     "name": "Omlette",
                     "ingredientsAmount": 5,
                     "howToMake": "Whisk eggs and milk. Add Salt and pepper. Put oil to the pan. Pour egg mixture to the pan. When cooked then, turn the omlette around and cook some more. Slide omlette onto plate."
+                }
+            },
+            "delete-recipe": {
+                "description": "",
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 1
                 }
             }
         }
