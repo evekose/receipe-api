@@ -16,9 +16,9 @@ exports.getById = async (req, res) => {
 }
 
 exports.createNew = async (req,res) => {
-    let game
+    let recipe
     try {
-        game = await Recipe.create(req.body)
+        recipe = await Recipe.create(req.body)
     } catch (error) {
         if (error instanceof db.Sequelize.ValidationError) {
             res.status(400).send({"error":error.errors.map((item)=> item.message)})
