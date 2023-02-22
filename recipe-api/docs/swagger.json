@@ -50,16 +50,56 @@
                                 }
                             }
                         }
-                    }
+                    },
+                    "required": true
                 },
                 "tags": [
-                    "ingredients"
+                    "new-ingredient"
                 ],
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/New-Ingredient"
+                                },
+                                "examples": {
+                                    "New-ingredient": {
+                                        "value": {
+                                            "id": 29.11,
+                                            "name": "some text",
+                                            "category": "some text",
+                                            "amount": 0.59
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "New ingredient created"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    " One ore more parameters are missing": {
+                                        "value": {
+                                            "error": "some text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
                     }
-                }
+                },
+                "summary": "Creates a ingredient",
+                "description": "Creates a new ingredient"
             }
         },
         "/recipe": {
@@ -179,6 +219,13 @@
             },
             "put": {
                 "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ingredient"
+                            }
+                        }
+                    },
                     "required": true
                 },
                 "tags": [
@@ -213,7 +260,17 @@
                         "description": "Server messed up"
                     }
                 }
-            }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
@@ -233,15 +290,64 @@
             },
             "Ingredient": {
                 "description": "id: {\r\n            type: Sequelize.INTEGER,\r\n            primaryKey: true,\r\n            autoIncrement: true\r\n        },\r\n        name: {\r\n            type: Sequelize.STRING,\r\n            allowNull: false,\r\n        },\r\n        category: {\r\n            type: Sequelize.STRING,\r\n            allowNull: false,\r\n        },\r\n        amount: {\r\n            type: Sequelize.DOUBLE,\r\n            allowNull: false,\r\n        }",
+                "required": [
+                    "name",
+                    "id"
+                ],
                 "type": "object",
                 "properties": {
                     "id": {
                         "description": "",
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "1"
                     },
                     "name": {
-                        "description": ""
+                        "description": "",
+                        "type": "string",
+                        "example": "tomato"
+                    },
+                    "category": {
+                        "description": "",
+                        "type": "string",
+                        "example": "vegetable"
+                    },
+                    "amount": {
+                        "description": "",
+                        "type": "number",
+                        "example": "20"
                     }
+                },
+                "example": "{\"name\": \"cabbage\", \"category\": vegetable}"
+            },
+            "New-Ingredient": {
+                "title": "Root Type for New-Ingredient",
+                "description": "",
+                "required": [
+                    "amount",
+                    "category",
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "id": "1",
+                    "name": "cabbage",
+                    "category": "vegetable",
+                    "amount": "5"
                 }
             }
         }
