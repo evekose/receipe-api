@@ -170,9 +170,20 @@
                         "application/json": {
                             "schema": {
                                 "type": "string"
+                            },
+                            "examples": {
+                                "Update data of a recipe": {
+                                    "value": {
+                                        "id": 3,
+                                        "name": "Chicken Curry",
+                                        "ingredientsAmount": 4,
+                                        "howToMake": "Buy Chicken and curry paste"
+                                    }
+                                }
                             }
                         }
-                    }
+                    },
+                    "required": true
                 },
                 "tags": [
                     "update-recipe"
