@@ -16,7 +16,27 @@ exports.getById = async (req, res) => {
 }
 
 exports.createNew = async (req,res) => {
-    console.log(req.body)
-    res.send(req.body)
+    let game
+    try {
+        game = await Recipe.create(req.body)
+    } catch (error) {
+        if (error instanceof db.Sequelize.ValidationError) {
+            res.status(400).send({"error":error.errors.map((item)=> item.message)})
+        } else {
+            console.log("RecipesCreate: ",error)
+            res.status(500).send({"error":"Something went wrong on our side. Sorry :("})
+        }
+        return
+    }
+    res
+        .status(201)
+        .location(`${getBaseUrl(req)}/games/${recipe.id}`)
+        .json(recipe)
 }
-    
+
+getBaseUrl = (request) => {
+    return (
+      (request.connection && request.connection.encrypted ? "https" : "http") +
+      `://${request.headers.host}`
+    )
+  }
