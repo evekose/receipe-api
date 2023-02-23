@@ -77,7 +77,7 @@
                     "required": true
                 },
                 "tags": [
-                    "new-recipe"
+                    "recipes"
                 ],
                 "responses": {
                     "200": {
@@ -114,7 +114,7 @@
         "/recipes/{id}": {
             "get": {
                 "tags": [
-                    "details"
+                    "recipes"
                 ],
                 "responses": {
                     "200": {
@@ -186,7 +186,7 @@
                     "required": true
                 },
                 "tags": [
-                    "update-recipe"
+                    "recipes"
                 ],
                 "responses": {
                     "200": {
@@ -204,7 +204,7 @@
             },
             "delete": {
                 "tags": [
-                    "delete-recipe"
+                    "recipes"
                 ],
                 "parameters": [
                     {
@@ -242,6 +242,7 @@
             ]
         },
         "/RecipeUsers": {
+            "description": "",
             "get": {
                 "tags": [
                     "recipe-user"
@@ -251,12 +252,162 @@
                         "description": "Returns all the data related to the users of a recipe "
                     },
                     "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "error": {
+                                        "value": {
+                                            "error": "error message"
+                                        }
+                                    }
+                                }
+                            }
+                        },
                         "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
                     }
                 },
-                "summary": "Gets all the details of a recipe related to the specific id",
-                "description": "Gets all the details of a recipe related to the specific id"
+                "summary": "Gives out a list of recipes",
+                "description": "Gives out a list of recipes that a user has selected."
             }
+        },
+        "/ingredients": {
+            "get": {
+                "tags": [
+                    "ingredients"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of ingredients": {
+                                        "value": [
+                                            "tomato",
+                                            "cucumber"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of ingredients"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                },
+                                "examples": {
+                                    "Ingredient not found": {
+                                        "value": "New ingredient was not found. "
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Ingredient was not found"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Get a list of all ingredients",
+                "description": "Returns a list of all ingredients in API"
+            }
+        },
+        "/ingredients/{id}": {
+            "get": {
+                "tags": [
+                    "ingredients"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given ingredient": {
+                                        "value": [
+                                            "some text",
+                                            "some text"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Return full details of a given id ingredient"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Ingredient /w+ was not found": {
+                                        "value": "Ingredient\\\\w+ was not found in ingredient array"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Ingredient was not found in ingredients array"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "operationId": "id1",
+                "summary": "Get full details of a ingredient",
+                "description": "Returns full details of given id ingredient"
+            },
+            "delete": {
+                "tags": [
+                    "ingredients"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content was found. "
+                    },
+                    "404": {
+                        "description": "Ingredient was not found"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Deletes a ingredient",
+                "description": "Deletes a ingredient"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
@@ -318,6 +469,51 @@
                 },
                 "example": {
                     "id": 1
+                }
+            },
+            "delete-ingredient": {
+                "title": "Root Type for delete-ingredient",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "id": 1
+                }
+            },
+            "new-ingredient": {
+                "title": "Root Type for new-ingredient",
+                "description": "",
+                "required": [
+                    "amount",
+                    "category",
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "id": "1",
+                    "name": "cabbage",
+                    "category": "vegetable",
+                    "amount": "5"
                 }
             }
         }
