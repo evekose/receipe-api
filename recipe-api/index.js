@@ -12,7 +12,7 @@ app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 require("./routes/app_routes")(app)
 
 app.listen(port, async()=>{
-    //await require("./db").Sync()
+    await require("./db").Sync()
 
     console.log(`API up at: http://localhost:${port}`)
 })
