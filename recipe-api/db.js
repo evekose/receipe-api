@@ -6,6 +6,8 @@ const sequelize = new Sequelize(
     {
         host: process.env.DB_HOST,
         dialect: "mariadb",
+        dialectOptions: {
+            connectTimeout:1000},
         define: {
             timestamps: false
         }
