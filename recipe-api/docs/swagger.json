@@ -1,11 +1,288 @@
 {
     "openapi": "3.0.2",
     "info": {
-        "title": "Recipe-API",
+        "title": "recipes-API",
         "version": "1.0.0",
-        "description": "### This is a Swagger UI for our Recipe API  \\n\\n### Error handling\\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\\n\\n```\\n{\\n  \\\"error\\\": \\\"Cleartext explanation of the error that occurred\\\"\\n}\\n```\\n\\n### Generic API errors\\nThese error responses can be returned by any of the described endpoints.\\n\\n| HTTP status  |  Description |\\n|---|---|\\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\\n| 404| The requested resource can not be found or the user does not have access to the resource.\\n| 5XX| A server error has occurred while processing the request."
+        "description": "### This is a Swagger UI for our Recipes API"
     },
     "paths": {
+        "/recipes": {
+            "get": {
+                "tags": [
+                    "recipes"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of recipes": {
+                                        "value": [
+                                            "Stuffed Peppers",
+                                            "Caesar Salad"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of recipes"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Recipe not found": {
+                                        "value": "New recipe was not found. "
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Recipe was not found"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Get a list of all recipes",
+                "description": "Returns a list of all recipes in API"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new recipe to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/new-recipe"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "recipes"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-recipe"
+                                }
+                            }
+                        },
+                        "description": "Request has succeeded"
+                    },
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-recipe"
+                                }
+                            }
+                        },
+                        "description": "New recipe has been created"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing."
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Creates a recipe",
+                "description": "Creates a new recipe"
+            }
+        },
+        "/recipes/{id}": {
+            "get": {
+                "tags": [
+                    "recipes"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of a given ": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "Stuffed Peppers",
+                                            "ingredientsAmount": 0,
+                                            "howToMake": ""
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Return full details of a given id recipe"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Recipe /w+ was not found": {
+                                        "value": "Recipe \\\\w + was not found in game array"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Recipe was not found in recipes array"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "id",
+                "summary": "Get full details of a recipe",
+                "description": "Return full details of a given id recipe"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "examples": {
+                                "Update data of a recipe": {
+                                    "value": {
+                                        "id": 3,
+                                        "name": "Chicken Curry",
+                                        "ingredientsAmount": 4,
+                                        "howToMake": "Buy Chicken and curry paste"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "recipes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates full details of a given id recipe"
+                    },
+                    "404": {
+                        "description": "Recipe was not found in recipes array"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Update recipe details",
+                "description": "Update recipe details"
+            },
+            "delete": {
+                "tags": [
+                    "recipes"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content was found. "
+                    },
+                    "404": {
+                        "description": "Recipe was not found. "
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Deletes a recipe",
+                "description": "Deletes a recipe by id"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/RecipeUsers": {
+            "description": "",
+            "get": {
+                "tags": [
+                    "recipe-user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns all the data related to the users of a recipe "
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "error": {
+                                        "value": {
+                                            "error": "error message"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Gives out a list of recipes",
+                "description": "Gives out a list of recipes that a user has selected."
+            }
+        },
         "/ingredients": {
             "get": {
                 "tags": [
@@ -32,148 +309,38 @@
                             }
                         },
                         "description": "Returns a list of ingredients"
-                    }
-                },
-                "summary": "Get a list of all ingredients",
-                "description": "Returns a list of all ingredients in API"
-            },
-            "post": {
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "string"
-                            },
-                            "examples": {
-                                "Add Ingredient": {
-                                    "value": "\"some text\""
-                                }
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "tags": [
-                    "new-ingredient"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Ok"
-                    },
-                    "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/New-Ingredient"
-                                },
-                                "examples": {
-                                    "New-ingredient": {
-                                        "value": {
-                                            "id": 29.11,
-                                            "name": "some text",
-                                            "category": "some text",
-                                            "amount": 0.59
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "New ingredient created"
                     },
                     "400": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/error"
-                                },
-                                "examples": {
-                                    " One ore more parameters are missing": {
-                                        "value": {
-                                            "error": "some text"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "One or all params are missing"
-                    }
-                },
-                "summary": "Creates a ingredient",
-                "description": "Creates a new ingredient"
-            }
-        },
-        "/recipe": {
-            "get": {
-                "tags": [
-                    "recipes"
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
                                     "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "items": {}
                                 },
                                 "examples": {
-                                    "List of recipes": {
-                                        "value": [
-                                            "recipe1",
-                                            "recipe2"
-                                        ]
+                                    "Ingredient not found": {
+                                        "value": "New ingredient was not found. "
                                     }
                                 }
                             }
                         },
-                        "description": "Returns a list of recipes"
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Ingredient was not found"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
                     }
                 },
-                "summary": "Get a list of all recipes",
-                "description": "Returns a list of all recipes in API"
-            }
-        },
-        "/customers": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "examples": {
-                                    "List of customers": {
-                                        "value": [
-                                            "customer1",
-                                            "customer2"
-                                        ]
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Returns a list of customers"
-                    }
-                },
-                "summary": "Get a list of all customers",
-                "description": "Returns a list of all customers in API"
+                "summary": "Get a list of all ingredients",
+                "description": "Returns a list of all ingredients in API"
             }
         },
         "/ingredients/{id}": {
             "get": {
                 "tags": [
-                    "ingredient"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
+                    "ingredients"
                 ],
                 "responses": {
                     "200": {
@@ -195,7 +362,7 @@
                                 }
                             }
                         },
-                        "description": "Returns full details of given ingredient"
+                        "description": "Return full details of a given id ingredient"
                     },
                     "404": {
                         "content": {
@@ -204,68 +371,45 @@
                                     "$ref": "#/components/schemas/error"
                                 },
                                 "examples": {
-                                    "Ingreideińt /w+ was not found ": {
+                                    "Ingredient /w+ was not found": {
                                         "value": "Ingredient\\\\w+ was not found in ingredient array"
                                     }
                                 }
                             }
                         },
-                        "description": "Ingredient was not found in ingredient array"
+                        "description": "Ingredient was not found in ingredients array"
+                    },
+                    "500": {
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
                     }
                 },
-                "operationId": "id",
+                "operationId": "id1",
                 "summary": "Get full details of a ingredient",
-                "description": "Returns full detail of given id ingredient"
-            },
-            "put": {
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Ingredient"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "tags": [
-                    "Ingredients"
-                ],
-                "responses": {
-                    "200": {}
-                }
+                "description": "Returns full details of given id ingredient"
             },
             "delete": {
-                "parameters": [
-                    {
-                        "name": "id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "in": "path",
-                        "required": true
-                    }
+                "tags": [
+                    "ingredients"
                 ],
                 "responses": {
-                    "204": {},
-                    "404": {},
+                    "204": {
+                        "description": "No content was found. "
+                    },
+                    "404": {
+                        "description": "Ingredient was not found"
+                    },
                     "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "description": "Server messed up"
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
                     }
-                }
+                },
+                "summary": "Deletes a ingredient",
+                "description": "Deletes a ingredient"
             },
             "parameters": [
                 {
                     "name": "id",
                     "schema": {
-                        "type": "string"
+                        "type": "integer"
                     },
                     "in": "path",
                     "required": true
@@ -288,39 +432,68 @@
                     "error": "Error message."
                 }
             },
-            "Ingredient": {
-                "description": "id: {\r\n            type: Sequelize.INTEGER,\r\n            primaryKey: true,\r\n            autoIncrement: true\r\n        },\r\n        name: {\r\n            type: Sequelize.STRING,\r\n            allowNull: false,\r\n        },\r\n        category: {\r\n            type: Sequelize.STRING,\r\n            allowNull: false,\r\n        },\r\n        amount: {\r\n            type: Sequelize.DOUBLE,\r\n            allowNull: false,\r\n        }",
+            "new-recipe": {
+                "title": "Root Type for new-recipe",
+                "description": "",
                 "required": [
-                    "name",
+                    "howToMake",
+                    "ingredientsAmount",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "ingredientsAmount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "howToMake": {
+                        "type": "string"
+                    },
+                    "pictureURL": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "some text",
+                    "ingredientsAmount": 56,
+                    "howToMake": "some text"
+                }
+            },
+            "delete-recipe": {
+                "description": "",
+                "required": [
                     "id"
                 ],
                 "type": "object",
                 "properties": {
                     "id": {
                         "description": "",
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "name": {
-                        "description": "",
-                        "type": "string",
-                        "example": "tomato"
-                    },
-                    "category": {
-                        "description": "",
-                        "type": "string",
-                        "example": "vegetable"
-                    },
-                    "amount": {
-                        "description": "",
-                        "type": "number",
-                        "example": "20"
+                        "type": "string"
                     }
                 },
-                "example": "{\"name\": \"cabbage\", \"category\": vegetable}"
+                "example": {
+                    "id": 1
+                }
             },
-            "New-Ingredient": {
-                "title": "Root Type for New-Ingredient",
+            "delete-ingredient": {
+                "title": "Root Type for delete-ingredient",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "id": 1
+                }
+            },
+            "new-ingredient": {
+                "title": "Root Type for new-ingredient",
                 "description": "",
                 "required": [
                     "amount",

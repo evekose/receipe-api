@@ -1,6 +1,9 @@
 require("dotenv").config()
-const app = require("express")()
+const express = require("express")
+const app = express()
 const port = process.env.APP_PORT
+
+app.use(express.json())
 
 const swaggerUI = require("swagger-ui-express")
 const swaggerDocument = require("./docs/swagger.json")
