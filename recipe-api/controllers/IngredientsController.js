@@ -24,7 +24,9 @@ exports.createNew = async (req, res) => {
         res.status(400).send({"error":error.errors.map((item)=> item.message)})
       } else {
         console.log("IngredientsCreate: ",error)
-        res.status(500).send({"error":"Something went wrong on our side. Sorry :("})
+        res
+          .status(500)
+          .send({"error":"Something went wrong on our side. Sorry :("})
       }
       return
     }
@@ -58,20 +60,18 @@ exports.createNew = async (req, res) => {
     try {
       result = await Ingredient.update(req.body, {where: {id: req.params.id}})
     } catch (error) {
-      if (error instanceof db.Sequelize.ValidationError) {
-        res.status(400).send({"error":error.errors.map((item)=> item.message)})
-      } else {
         console.log("IngredientsUpdate: ",error)
-        res.status(500).send({"error":"Something went wrong on our side. Sorry :("})
-      }
-      return
+        res.status(500).send({error:"Something went wrong on our side. Sorry :("})
+        return
     }
-    if (ingredient[0]===0) {
+    if (result === 0) {
       res.status(404).send({"error": "Ingredient not found"})
       return
     }
     const ingredient = await Ingredient.findByPk(req.params.id)
-    res.status(200).location(`${getBaseUrl(req)}/ingredients/${ingredient.id}`).json(ingredient)
+    res.status(200)
+        .location(`${getBaseUrl(req)}/ingredients/${ingredient.id}`)
+        .json(ingredient)
   }
 
   getBaseUrl = (request) => {
