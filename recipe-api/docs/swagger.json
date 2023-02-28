@@ -258,6 +258,9 @@
                     "200": {
                         "description": "Returns all the data related to the users of a recipe "
                     },
+                    "404": {
+                        "description": "Content not found"
+                    },
                     "500": {
                         "content": {
                             "application/json": {
@@ -468,7 +471,7 @@
                         "description": "Updates full details of a given id ingredient"
                     },
                     "404": {
-                        "description": "Ingredient was not found in ingediants array"
+                        "description": "Ingredient was not found in ingedients array"
                     },
                     "500": {
                         "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
