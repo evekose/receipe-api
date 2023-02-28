@@ -70,7 +70,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "string"
+                                "$ref": "#/components/schemas/new-recipe"
                             }
                         }
                     },
@@ -81,6 +81,13 @@
                 ],
                 "responses": {
                     "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-recipe"
+                                }
+                            }
+                        },
                         "description": "Request has succeeded"
                     },
                     "201": {
@@ -450,9 +457,9 @@
                     }
                 },
                 "example": {
-                    "name": "Omlette",
-                    "ingredientsAmount": 5,
-                    "howToMake": "Whisk eggs and milk. Add Salt and pepper. Put oil to the pan. Pour egg mixture to the pan. When cooked then, turn the omlette around and cook some more. Slide omlette onto plate."
+                    "name": "some text",
+                    "ingredientsAmount": 56,
+                    "howToMake": "some text"
                 }
             },
             "delete-recipe": {
