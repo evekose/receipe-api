@@ -248,44 +248,6 @@
                 }
             ]
         },
-        "/RecipeUsers": {
-            "description": "",
-            "get": {
-                "tags": [
-                    "recipe-user"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Returns all the data related to the users of a recipe "
-                    },
-                    "404": {
-                        "description": "Content not found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "examples": {
-                                    "error": {
-                                        "value": {
-                                            "error": "error message"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
-                    }
-                },
-                "summary": "Gives out a list of recipes",
-                "description": "Gives out a list of recipes that a user has selected."
-            }
-        },
         "/ingredients": {
             "get": {
                 "tags": [
@@ -508,6 +470,44 @@
                     "required": true
                 }
             ]
+        },
+        "/users": {
+            "description": "",
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns all the data related to the users of a recipe "
+                    },
+                    "404": {
+                        "description": "Content not found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "error": {
+                                        "value": {
+                                            "error": "error message"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
+                    }
+                },
+                "summary": "Gives out a list of users",
+                "description": "Gives out a list of users"
+            }
         }
     },
     "components": {
