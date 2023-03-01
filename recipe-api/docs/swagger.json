@@ -588,14 +588,10 @@
                 "required": [
                     "amount",
                     "category",
-                    "id",
                     "name"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "number"
-                    },
                     "name": {
                         "type": "string"
                     },
@@ -607,7 +603,6 @@
                     }
                 },
                 "example": {
-                    "id": "1",
                     "name": "cabbage",
                     "category": "vegetable",
                     "amount": "5"
