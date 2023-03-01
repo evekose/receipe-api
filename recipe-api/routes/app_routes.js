@@ -23,10 +23,10 @@ module.exports = (app) => {
     .put(ingredientsController.updateById) // Update
     .delete(ingredientsController.deleteById); // Delete
 
-    app.route("/users")
+  app.route("/users")
     .get(usersController.getAll)
     .post(usersController.createNew)    //Create
-app.route("/users/:id")
+  app.route("/users/:id")
     .get(usersController.getById)       //Read
     .put(usersController.updateById)    //Update
     .delete(usersController.deleteById) //Delete

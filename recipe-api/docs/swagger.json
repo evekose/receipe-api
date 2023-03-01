@@ -475,14 +475,11 @@
             "description": "",
             "get": {
                 "tags": [
-                    "user"
+                    "users"
                 ],
                 "responses": {
                     "200": {
                         "description": "Returns all the data related to the users of a recipe "
-                    },
-                    "404": {
-                        "description": "Content not found"
                     },
                     "500": {
                         "content": {

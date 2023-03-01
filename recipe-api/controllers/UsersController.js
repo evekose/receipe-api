@@ -11,7 +11,7 @@ exports.getAll = async (req,res)=>{
   }
 }
 exports.createNew = async (req,res)=>{    
-    res.send({"message":"Not ipmlemented yet"})
+    res.send({"message":"Not implemented yet"})
 }
 exports.getById = async (req, res) => {
     const User = await Users.findByPk(req.params.id, {
@@ -31,8 +31,8 @@ exports.getById = async (req, res) => {
     }
   }
 exports.updateById = async (req,res)=>{    
-    res.send({"message":"Not ipmlemented yet"})
+    res.send({"message":"Not implemented yet"})
 }
 exports.deleteById = async (req,res)=>{    
-    res.send({"message":"Not ipmlemented yet"})
+    res.send({"message":"Not implemented yet"})
 }
