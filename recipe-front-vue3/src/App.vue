@@ -9,7 +9,7 @@
   </div> 
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
-    <modal :show="showModal" @close="showModal = false">
+    <modal :show="recipeDetailId != 0" @close="recipeDetailId = 0">
       <template #header>
         <h3>Recipe Details</h3>
       </template>
@@ -50,8 +50,8 @@ export default {
   },
   watch: {
     async recipeDetailId(newId) {
+      if (newId == 0) return;
       this.currentRecipe = await (await fetch(`http://localhost:8090/recipes/${newId}`)).json();
-      this.showModal = true;
     },
   },
 };
