@@ -24,6 +24,7 @@ module.exports = (app) => {
     .put(ingredientsController.updateById) // Update
     .delete(ingredientsController.deleteById); // Delete
 
-    app.route("/recipeIngredient")
+  app.route("/recipeIngredient")
     .get(recipeIngredientController.getAll)
 };
+
