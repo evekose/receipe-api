@@ -1,19 +1,12 @@
 <template>
   <div>
-    <table border="1">
-    <caption>
-    All Recipes
-    </caption>
-      <tr>
-        <th>Name</th>
-        <th></th>
-      </tr>
-      <tr v-for="recipe in recipes" :key="recipe.id">
-      <td> {{ recipe.name }}</td>
-      <td><button @click="recipeDetailId = recipe.id">Show details</button></td>
-      </tr>
-    </table>
-  </div>
+    <table-template 
+    caption="All recipes" 
+    :items="recipes" :showControls="true" 
+    @show="recipeDetailId = $event.id"
+    >
+    </table-template>
+  </div> 
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
     <modal :show="showModal" @close="showModal = false">
@@ -32,10 +25,11 @@
 
 <script>
 import Modal from "./components/Modal.vue";
-
+import TableTemplate from "./components/Table.vue";
 export default {
   components: {
     Modal,
+    TableTemplate,
   },
   data() {
     return {
