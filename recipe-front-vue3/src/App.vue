@@ -6,19 +6,48 @@
     </caption>
       <tr>
         <th>Name</th>
+        <th></th>
       </tr>
       <tr v-for="recipe in recipes" :key="recipe.id">
       <td> {{ recipe.name }}</td>
+      <td><button @click="showModal = true">Show details</button></td>
       </tr>
     </table>
   </div>
+  <Teleport to="body">
+    <!-- use the modal component, pass in the prop -->
+    <modal :show="showModal" @close="showModal = false">
+      <template #header>
+        <h3>Recipe Details</h3>
+      </template>
+      <template #body>
+        <b>Name: </b>{{ currentRecipe.name }} <br />
+        <b>Ingredients Amount: </b>{{ currentRecipe.ingredientsAmount }} <br />
+        <b>How To Make: </b>{{ currentRecipe.howToMake }} <br />
+        <b>Picture url: </b>{{ currentRecipe.pictureURL }} <br />
+      </template>
+    </modal>
+  </Teleport>
 </template>
 
 <script>
+import Modal from "./components/Modal.vue";
+
 export default {
+  components: {
+    Modal,
+  },
   data() {
     return {
       recipes: [],
+      showModal: false,
+      currentRecipe: {
+        id: 0, 
+        name:"", 
+        ingredientsAmount:"", 
+        howToMake:"",
+        pictureURL:"",
+      },
     };
   },
   async created() {
