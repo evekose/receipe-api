@@ -1,6 +1,7 @@
 const recipesController = require("../controllers/RecipesController.js");
 const ingredientsController = require("../controllers/IngredientsController.js");
-const usersController = require("../controllers/UsersController.js");
+const recipeIngredientController = require("../controllers/recipeIngredientController.js")
+
 
 module.exports = (app) => {
   app
@@ -23,11 +24,6 @@ module.exports = (app) => {
     .put(ingredientsController.updateById) // Update
     .delete(ingredientsController.deleteById); // Delete
 
-    app.route("/users")
-    .get(usersController.getAll)
-    .post(usersController.createNew)    //Create
-app.route("/users/:id")
-    .get(usersController.getById)       //Read
-    .put(usersController.updateById)    //Update
-    .delete(usersController.deleteById) //Delete
+    app.route("/recipeIngredient")
+    .get(recipeIngredientController.getAll)
 };

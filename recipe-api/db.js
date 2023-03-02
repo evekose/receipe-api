@@ -19,7 +19,8 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.recipes = require("./models/Recipe.model")(sequelize,Sequelize)
 db.ingredients = require("./models/Ingredient.model")(sequelize,Sequelize)
-db.users = require("./models/User.model")(sequelize,Sequelize)
+db.recipeIngredients = require("./models/RecipeIngredient.model")(sequelize, Sequelize, db.recipes, db.ingredients)
+
 
 async function Sync() {
     await sequelize.sync({alter:true}) //alter existing table
