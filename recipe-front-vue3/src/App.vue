@@ -10,7 +10,7 @@
       </tr>
       <tr v-for="recipe in recipes" :key="recipe.id">
       <td> {{ recipe.name }}</td>
-      <td><button @click="showModal = true">Show details</button></td>
+      <td><button @click="recipeDetailId = recipe.id">Show details</button></td>
       </tr>
     </table>
   </div>
@@ -41,6 +41,7 @@ export default {
     return {
       recipes: [],
       showModal: false,
+      recipeDetailId: 0,
       currentRecipe: {
         id: 0, 
         name:"", 
@@ -52,6 +53,12 @@ export default {
   },
   async created() {
     this.recipes = await (await fetch("http://localhost:8090/recipes")).json();
+  },
+  watch: {
+    async recipeDetailId(newId) {
+      this.currentRecipe = await (await fetch(`http://localhost:8090/recipes/${newId}`)).json();
+      this.showModal = true;
+    },
   },
 };
 
