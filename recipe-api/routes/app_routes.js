@@ -26,5 +26,8 @@ module.exports = (app) => {
 
   app.route("/recipeIngredient")
     .get(recipeIngredientController.getAll)
+
+    app.route("/recipeIngredient/:name")
+        .get(recipeIngredientController.getByName) 
 };
 

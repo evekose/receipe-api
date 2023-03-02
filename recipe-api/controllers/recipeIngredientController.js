@@ -40,7 +40,7 @@ exports.getAll = async (req, res) => {
         const result = recipeIngredients.map((af) => {
             return {
                 "name": af.recipe.name,
-                "fingredient": af.ingredient.name
+                "ingredient": af.ingredient.name
             }
         })
 
@@ -50,6 +50,33 @@ exports.getAll = async (req, res) => {
         res.status(500).send({ message: "Something went wrong on our side. Sorry" })
     }
 }
+
+exports.getByName = async (req, res) => {
+    try {
+      const recipeName = req.params.name
+      const recipe = await Recipe.findOne({ where: { name: recipeName } })
+      
+      if (!recipe) {
+        res.status(404).send({ message: "Recipe not found" })
+        return
+      }
+  
+      const recipeIngredients = await RecipeIngredient.findAll({
+        include: { model: Ingredient },
+        where: { recipeId: recipe.id },
+      })
+  
+      const result = recipeIngredients.map((af) => ({
+        "name": recipeName,
+        "ingredient": af.ingredient.name
+      }))
+  
+      res.send(result)
+    } catch (error) {
+      console.error(error)
+      res.status(500).send({ message: "Something went wrong on our side. Sorry" })
+    }
+  }
 
 
 
