@@ -1,24 +1,34 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<template>
+  <div>
+    <table border="1">
+    <caption>
+    All Recipes
+    </caption>
+      <tr>
+        <th>Name</th>
+      </tr>
+      <tr v-for="recipe in recipes" :key="recipe.id">
+      <td> {{ recipe.name }}</td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      recipes: [],
+    };
+  },
+  async created() {
+    this.recipes = await (await fetch("http://localhost:8090/recipes")).json();
+  },
+};
+
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
 
 <style scoped>
 header {
