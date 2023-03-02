@@ -471,18 +471,15 @@
                 }
             ]
         },
-        "/users": {
+        "/recipeIngredient": {
             "description": "",
             "get": {
                 "tags": [
-                    "user"
+                    "users"
                 ],
                 "responses": {
                     "200": {
-                        "description": "Returns all the data related to the users of a recipe "
-                    },
-                    "404": {
-                        "description": "Content not found"
+                        "description": "Returns all the data related to the ingredients of a recipe "
                     },
                     "500": {
                         "content": {
@@ -505,8 +502,8 @@
                         "description": "The server encountered an unexpected condition that prevented it from fulfilling the request"
                     }
                 },
-                "summary": "Gives out a list of users",
-                "description": "Gives out a list of users"
+                "summary": "Gives out a list of ingredients of a recipe",
+                "description": "Gives out a list of ingredients of a recipe"
             }
         }
     },
@@ -591,14 +588,10 @@
                 "required": [
                     "amount",
                     "category",
-                    "id",
                     "name"
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "number"
-                    },
                     "name": {
                         "type": "string"
                     },
@@ -610,7 +603,6 @@
                     }
                 },
                 "example": {
-                    "id": "1",
                     "name": "cabbage",
                     "category": "vegetable",
                     "amount": "5"
