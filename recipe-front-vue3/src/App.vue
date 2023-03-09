@@ -7,44 +7,25 @@
     >
     </table-template>
   </div> 
-  <Teleport to="body">
-    <!-- use the modal component, pass in the prop -->
-    <modal :show="recipeDetailId != 0" @close="recipeDetailId = 0">
-      <template #header>
-        <h3>Recipe Details</h3>
-      </template>
-      <template #body>
-        <b>Name: </b>{{ currentRecipe.name }} <br />
-        <b>Ingredients Amount: </b>{{ currentRecipe.ingredientsAmount }} <br />
-        <b>How To Make: </b>{{ currentRecipe.howToMake }} <br />
-        <b>Picture url: </b>{{ currentRecipe.pictureURL }} <br />
-      </template>
-    </modal>
-  </Teleport>
+  <recipe-details :recipeDetailId="recipeDetailId"
+  @close="recipeDetailId = 0"
+  ></recipe-details>
 </template>
 
 <script>
-import Modal from "./components/Modal.vue";
 import TableTemplate from "./components/Table.vue";
+import RecipeDetails from "./components/RecipeDetails.vue";
 export default {
   components: {
-    Modal,
     TableTemplate,
+    RecipeDetails,
   },
   data() {
     return {
       recipes: [],
-      showModal: false,
       recipeDetailId: 0,
-      currentRecipe: {
-        id: 0, 
-        name:"", 
-        ingredientsAmount:"", 
-        howToMake:"",
-        pictureURL:"",
-      },
-    };
-  },
+      };
+    },
   async created() {
     this.recipes = await (await fetch("http://localhost:8090/recipes")).json();
   },
